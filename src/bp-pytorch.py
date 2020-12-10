@@ -35,13 +35,10 @@ class Net(nn.Module):
         # af = torch.sigmoid
 
         x = af(self.input_layer(x))
-        print(x)
         x = af(self.hidden_layer1(x))
-        print(x)
         # x = af(self.hidden_layer2(x))
         # x = af(self.hidden_layer3(x))
         x = self.output_layer(x)
-        print(x)
         return x
 
 def main():
@@ -59,6 +56,7 @@ def main():
     target_testSamples = torch.LongTensor(testData[:, :1].reshape(1, -1)[0]) - 1
     
     avg_accuracy = []
+
     for n in range(1):
         net = Net()
         # 随机梯度下降
@@ -67,7 +65,7 @@ def main():
         criterion = nn.CrossEntropyLoss()
 
         # 训练
-        for i in range(1):
+        for i in range(3000):
             # 梯度清零
             optimizer.zero_grad()
             # 将样本 trainingSamples 传入网络得到结果 out
@@ -90,5 +88,5 @@ def main():
 
     print(np.average(np.array(avg_accuracy)))
 
-if __name__ == '__main__':
-    main()
+
+main()
